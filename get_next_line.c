@@ -6,9 +6,44 @@
 /*   By: rachou <rachou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:09:19 by rachou            #+#    #+#             */
-/*   Updated: 2023/11/09 15:08:04 by rachou           ###   ########.fr       */
+/*   Updated: 2023/11/09 16:40:28 by rachou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
+
+char	*get_line(t_list *list)
+{
+	int		str_len;
+	char	*next_str;
+
+	if (NULL == list)
+		return (NULL);
+								   //count how many char are till '\n'.
+	str_len = len_to_newline(list);//this is a function that takes a pointer to a list and is counting all the chars till the new line.
+	next_str = malloc(str_len + 1);//so i know how much to malloc.  +1 for the '\0'.
+	if (NULL == next_str)
+		return (NULL);
+	copy_str(list, next_str);//copy the string in the buffer ans return it.
+	return (next_str);
+}
+
+void	append(t_list **list, char *buf)//list here is a pointer to a pointer.
+{
+	t_list	*new_node;
+	t_list	*last_node;
+
+	last_node = find_last_node(*list);
+	new_node = malloc(sizeof(t_list));
+	if (NULL == new_node)
+		return ;
+	if (NULL == last_node)
+		*list = new_node;//assign to list the value of new_node. so new_node is gonna become the first of new_node of the link list.
+	else
+		last_node->next = new_node;
+	new_node->str_buf = buf;//assign to the new node string the buffer.
+	new_node->next = NULL;
+}
 
 void	create_list(t_list **list, int fd)
 {//necessary to place the \0 -> "string\0".
@@ -40,4 +75,10 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
 	create_list(&list, fd);//create my list until i stumble into '\n'.
+
+	if (list == NULL)
+		return (NULL);
+	next_line = get_line(list);//fetch the line from the list. i want to get the line that is stocked inside linklist and the heap.
+	polish_list(&list);
+	return (next_line);
 }

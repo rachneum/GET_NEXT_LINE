@@ -6,7 +6,7 @@
 /*   By: rachou <rachou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:04:51 by rachou            #+#    #+#             */
-/*   Updated: 2023/11/09 14:45:19 by rachou           ###   ########.fr       */
+/*   Updated: 2023/11/09 16:37:12 by rachou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ typedef struct s_list
 }					t_list
 
 char	*get_next_line(int fd);
+char	*get_line(t_list *list);
 void	create_list(t_list **list, int fd);
+void	append(t_list **list, char *buf);
+void	copy_str(t_list *list, char *str);
+void	polish_list(t_list **list);
+int		len_to_newline(t_list *list);
 
 
 # endif
