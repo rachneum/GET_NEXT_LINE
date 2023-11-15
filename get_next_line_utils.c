@@ -6,7 +6,7 @@
 /*   By: rachou <rachou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:09:59 by rachou            #+#    #+#             */
-/*   Updated: 2023/11/15 16:25:37 by rachou           ###   ########.fr       */
+/*   Updated: 2023/11/15 17:01:36 by rachou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	found_newline(t_list *list)
 {
 	int	i;
 
-	if (NULL == list)
+	if (list == NULL)
 		return (0);
 	while (list)
 	{
@@ -26,7 +26,7 @@ int	found_newline(t_list *list)
 		{
 			if (list->str_buf[i] == '\n')
 				return (1);
-			++i;
+			i++;
 		}
 		list = list->next;
 	}
@@ -35,7 +35,7 @@ int	found_newline(t_list *list)
 
 t_list	*find_last_node(t_list	*list)
 {
-	if (NULL == list)
+	if (list == NULL)
 		return (NULL);
 	while (list->next)
 		list = list->next;
@@ -47,7 +47,7 @@ void	copy_str(t_list *list, char *str)
 	int	i;
 	int	k;
 
-	if (NULL == list)
+	if (list == NULL)
 		return ;
 	k = 0;
 	while (list)
@@ -73,7 +73,7 @@ int	len_to_newline(t_list *list)
 	int	i;
 	int	len;
 
-	if (NULL == list)
+	if (list == NULL)
 		return (0);
 	len = 0;
 	while (list)//== list != NULL.
@@ -83,11 +83,11 @@ int	len_to_newline(t_list *list)
 		{
 			if (list->str_buf[i] == '\n')//check if the char is the newline.
 			{
-				++len;
+				len++;
 				return (len);
 			}
-			++i;
-			++len;
+			i++;
+			len++;
 		}
 		list = list->next;//this is gonna lead me to the final node that is pointing to NULL.
 	}
@@ -98,7 +98,7 @@ void	dealloc(t_list **list, t_list *clean_node, char *buf)
 {
 	t_list	*tmp;
 
-	if (NULL == *list)
+	if (*list == NULL)
 		return ;
 	while (*list)
 	{
