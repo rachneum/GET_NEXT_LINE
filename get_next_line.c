@@ -6,7 +6,7 @@
 /*   By: rachou <rachou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:09:19 by rachou            #+#    #+#             */
-/*   Updated: 2023/11/16 13:37:11 by rachou           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:23:03 by rachou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_line(t_list *list)
 		return (NULL);
 	str_len = len_to_newline(list);
 	next_str = malloc(str_len + 1);
-	if (NULL == next_str)
+	if (next_str == NULL)
 		return (NULL);
 	copy_str(list, next_str);
 	return (next_str);
